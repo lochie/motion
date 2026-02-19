@@ -173,9 +173,7 @@ export interface ProjectionNodeOptions {
     layout?: boolean | string
     visualElement?: VisualElement
     crossfade?: boolean
-    layoutCurve?: {
-        amplitude: number
-    }
+    layoutArc?: boolean | number | { amplitude: number; peak?: number }
     transition?: Transition
     initialPromotionConfig?: InitialPromotionConfig
 }

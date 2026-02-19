@@ -7,13 +7,15 @@ function NavigationItem({
     current,
     onClick,
     id,
-    layoutCurveAmplitude,
+    layoutArcAmplitude,
+    layoutArcPeak,
 }: {
     title: string
     current?: boolean
     onClick?: () => void
     id: string
-    layoutCurveAmplitude?: number
+    layoutArcAmplitude?: number
+    layoutArcPeak?: number
 }) {
     return (
         <div
@@ -26,8 +28,9 @@ function NavigationItem({
                 <motion.span
                     id="current-indicator"
                     layoutId="current-indicator"
-                    layoutCurve={{
-                        amplitude: layoutCurveAmplitude,
+                    layoutArc={{
+                        amplitude: layoutArcAmplitude,
+                        peak: layoutArcPeak,
                     }}
                     transition={{ duration: 1, ease: "easeInOut" }}
                     style={{
@@ -55,7 +58,8 @@ function NavigationItem({
 
 export default function Page() {
     const [state, setState] = useState("a")
-    const [layoutCurveAmplitude, setCurveAmplitude] = useState(1)
+    const [layoutArcAmplitude, setArcAmplitude] = useState(1)
+    const [layoutArcPeak, setArcPeak] = useState(0.5)
 
     return (
         <div
@@ -76,15 +80,26 @@ export default function Page() {
                 }}
             >
                 <label>
-                    <code>layoutCurveAmplitude: {layoutCurveAmplitude}</code>
+                    <code>amplitude: {layoutArcAmplitude}</code>
                 </label>
                 <input
                     type="range"
                     min={-1}
                     step={0.1}
                     max={1}
-                    value={layoutCurveAmplitude}
-                    onChange={(e) => setCurveAmplitude(Number(e.target.value))}
+                    value={layoutArcAmplitude}
+                    onChange={(e) => setArcAmplitude(Number(e.target.value))}
+                />
+                <label>
+                    <code>peak: {layoutArcPeak}</code>
+                </label>
+                <input
+                    type="range"
+                    min={0}
+                    step={0.1}
+                    max={1}
+                    value={layoutArcPeak}
+                    onChange={(e) => setArcPeak(Number(e.target.value))}
                 />
             </div>
             <div
@@ -107,7 +122,8 @@ export default function Page() {
                             title="Primary Location"
                             current={state === "a"}
                             onClick={() => setState("a")}
-                            layoutCurveAmplitude={layoutCurveAmplitude}
+                            layoutArcAmplitude={layoutArcAmplitude}
+                            layoutArcPeak={layoutArcPeak}
                         />
 
                         <NavigationItem
@@ -115,7 +131,8 @@ export default function Page() {
                             title="Secondary Location"
                             current={state === "b"}
                             onClick={() => setState("b")}
-                            layoutCurveAmplitude={layoutCurveAmplitude}
+                            layoutArcAmplitude={layoutArcAmplitude}
+                            layoutArcPeak={layoutArcPeak}
                         />
                     </LayoutGroup>
                 </div>
@@ -141,7 +158,8 @@ export default function Page() {
                             title="Primary Location"
                             current={state === "a"}
                             onClick={() => setState("a")}
-                            layoutCurveAmplitude={layoutCurveAmplitude}
+                            layoutArcAmplitude={layoutArcAmplitude}
+                            layoutArcPeak={layoutArcPeak}
                         />
 
                         <NavigationItem
@@ -149,7 +167,8 @@ export default function Page() {
                             title="Secondary Location"
                             current={state === "b"}
                             onClick={() => setState("b")}
-                            layoutCurveAmplitude={layoutCurveAmplitude}
+                            layoutArcAmplitude={layoutArcAmplitude}
+                            layoutArcPeak={layoutArcPeak}
                         />
                     </LayoutGroup>
                 </div>
@@ -176,7 +195,8 @@ export default function Page() {
                                 title="Primary Location"
                                 current={state === "a"}
                                 onClick={() => setState("a")}
-                                layoutCurveAmplitude={layoutCurveAmplitude}
+                                layoutArcAmplitude={layoutArcAmplitude}
+                            layoutArcPeak={layoutArcPeak}
                             />
                         </div>
 
@@ -185,7 +205,8 @@ export default function Page() {
                             title="Secondary Location"
                             current={state === "b"}
                             onClick={() => setState("b")}
-                            layoutCurveAmplitude={layoutCurveAmplitude}
+                            layoutArcAmplitude={layoutArcAmplitude}
+                            layoutArcPeak={layoutArcPeak}
                         />
                     </LayoutGroup>
                 </div>
