@@ -968,15 +968,19 @@ export interface MotionNodeLayoutOptions {
     layoutCrossfade?: boolean
 
     /**
-     * By default, layout animations animate from a straight line between the two bounding boxes.
-     * By setting this to a number, the animation will animate along a curve with the given
-     * amplitude.
+     * By default, layout animations animate along a straight line between the two bounding boxes.
+     * Setting this prop makes the animation travel along a curved (quadratic Bezier) arc.
+     *
+     * - `layoutArc={true}` — default amplitude of 0.5
+     * - `layoutArc={0.7}` — custom amplitude
+     * - `layoutArc={{ amplitude: 0.7, peak: 0.3 }}` — object form with asymmetric arc
+     *
+     * `amplitude` controls how far the arc bulges perpendicular to the straight-line path.
+     * `peak` (0-1, default 0.5) shifts where along the path the arc reaches its maximum height.
      *
      * @public
      */
-    layoutCurve?: {
-        amplitude: number
-    }
+    layoutArc?: boolean | number | { amplitude: number; peak?: number }
 }
 
 /**
